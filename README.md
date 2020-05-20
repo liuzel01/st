@@ -24,7 +24,7 @@
 
 ## Other st patches
 
-+ ~~Vertcenter, Scrollback, font2 ~~
++ ~~Vertcenter, Scrollback, font2~~
 + ~~updated to latest version 0.8.2~~
 
 ## Installation for newbs

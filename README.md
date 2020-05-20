@@ -1,6 +1,6 @@
-# Luke's build of st - the simple (suckless) terminal
+# st - the simple (suckless) terminal
 
-The [suckless terminal (st)](https://st.suckless.org/) with some additional features that make it literally the best terminal emulator ever:
+- fork from [HERE](https://github.com/LukeSmithxyz/st),and make some changes
 
 ## Unique features (using dmenu)
 
@@ -24,41 +24,19 @@ The [suckless terminal (st)](https://st.suckless.org/) with some additional feat
 
 ## Other st patches
 
-+ Vertcenter
-+ Scrollback
-+ font2
-+ updated to latest version 0.8.2
++ ~~Vertcenter, Scrollback, font2 ~~
++ ~~updated to latest version 0.8.2~~
 
 ## Installation for newbs
 
 ```
-git clone https://github.com/LukeSmithxyz/st
+git clone https://github.com/liuzel01/st
 cd st
 sudo make install
+OR sudo make clean install
 ```
 
 Users of Arch-based distros can also install it from the AUR as [st-luke-git](https://aur.archlinux.org/packages/st-luke-git/).
-
-Obviously, `make` is required to build. `fontconfig` is required for the default build, since it asks `fontconfig` for your system monospace font.  It might be obvious, but `libX11` and `libXft` are required as well. Chances are, you have all of this installed already.
-
-On OpenBSD, be sure to edit `config.mk` first and remove `-lrt` from the `$LIBS` before compiling.
-
-Be sure to have a composite manager (`xcompmgr`, `compton`, etc.) running if you want transparency.
-
-## How to configure dynamically with Xresources
-
-For many key variables, this build of `st` will look for X settings set in either `~/.Xdefaults` or `~/.Xresources`. You must run `xrdb` on one of these files to load the settings.
-
-For example, you can define your desired fonts, transparency or colors:
-
-```
-*.font:	Liberation Mono:pixelsize=12:antialias=true:autohint=true;
-*.alpha: 0.9
-*.color0: #111
-...
-```
-
-The `alpha` value (for transparency) goes from `0` (transparent) to `1` (opaque).
 
 ### Colors
 
@@ -77,6 +55,3 @@ If st crashes when viewing emojis, install [libxft-bgra](https://aur.archlinux.o
 Note that some special characters may appear truncated if too wide. You might want to manually set your prefered emoji/special character font to a lower size in the `config.h` file to avoid this. By default, JoyPixels is used at a smaller size than the usual text.
 
 ## Contact
-
-- Luke Smith <luke@lukesmith.xyz>
-- [https://lukesmith.xyz](https://lukesmith.xyz)

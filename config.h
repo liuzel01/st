@@ -1,116 +1,49 @@
 /* See LICENSE file for copyright and license details. */
-
-/*
- * appearance
- *
- * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
- */
-//static char *font = "mono:pixelsize=16:antialias=true:autohint=true";
 static char *font = "Source Code Pro:pixelsize=16:antialias=true:autohint=true";
 static char *font2[] = { "JoyPixels:pixelsize=10:antialias=true:autohint=true" };
 static int borderpx = 2;
-
-/*
- * What program is execed by st depends of these precedence rules:
- * 1: program passed with -e
- * 2: utmp option
- * 3: SHELL environment variable
- * 4: value of shell in /etc/passwd
- * 5: value of shell in config.h
- */
 static char *shell = "/bin/sh";
 char *utmp = NULL;
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
-
 /* identification sequence returned in DA and DECID */
 char *vtiden = "\033[?6c";
-
 /* Kerning / character bounding-box multipliers */
 static float cwscale = 1.0;
 static float chscale = 1.0;
-
 /*
  * word delimiter string
- *
  * More advanced example: L" `'\"()[]{}"
  */
 wchar_t *worddelimiters = L" ";
-
-/* selection timeouts (in milliseconds) */
 static unsigned int doubleclicktimeout = 300;
 static unsigned int tripleclicktimeout = 600;
-
 /* alt screens */
 int allowaltscreen = 1;
-
-/*
- * draw latency range in ms - from new content/keypress/etc until drawing.
- * within this range, st draws when content stops arriving (idle). mostly it's
- * near minlatency, but it waits longer for slow updates to avoid partial draw.
- * low minlatency will tear/flicker more, as it can "detect" idle too early.
- */
 static double minlatency = 8;
 static double maxlatency = 33;
-
 /*
  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
  * attribute.
  */
 static unsigned int blinktimeout = 800;
-
-/*
- * interval (in milliseconds) between each successive call to ximspot. This
- * improves terminal performance while not reducing functionality to those
- * whom need XIM support.
- */
 int ximspot_update_interval = 1000;
-
 /*
  * thickness of underline and bar cursors
  */
 static unsigned int cursorthickness = 2;
-
-/*
- * 1: render most of the lines/blocks characters without using the font for
- *    perfect alignment between cells (U2500 - U259F except dashes/diagonals).
- *    Bold affects lines thickness if boxdraw_bold is not 0. Italic is ignored.
- * 0: disable (render all U25XX glyphs normally from the font).
- */
 const int boxdraw = 1;
 const int boxdraw_bold = 1;
-
 /* braille (U28XX):  1: render as adjacent "pixels",  0: use font */
 const int boxdraw_braille = 1;
-
 /*
  * bell volume. It must be a value between -100 and 100. Use 0 for disabling
  * it
  */
 static int bellvolume = 0;
-
 /* default TERM value */
 char *termname = "st-256color";
-
-/*
- * spaces per tab
- *
- * When you are changing this value, don't forget to adapt the »it« value in
- * the st.info and appropriately install the st.info in the environment where
- * you use this st version.
- *
- *	it#$tabspaces,
- *
- * Secondly make sure your kernel is not expanding tabs. When running `stty
- * -a` »tab0« should appear. You can tell the terminal to not expand tabs by
- *  running following command:
- *
- *	stty tabs
- */
 unsigned int tabspaces = 8;
-
-/* bg opacity */
 float alpha = 0.8;
-
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	"#282828", /* hard contrast: #1d2021 / soft contrast: #32302f */
@@ -136,17 +69,10 @@ static const char *colorname[] = {
 	"#282828", /* 258 -> bg */
 	"#ebdbb2", /* 259 -> fg */
 };
-
-
-/*
- * Default colors (colorname index)
- * foreground, background, cursor, reverse cursor
- */
 unsigned int defaultfg = 259;
 unsigned int defaultbg = 258;
 unsigned int defaultcs = 256;
 unsigned int defaultrcs = 257;
-
 /*
  * Default shape of cursor
  * 2: Block ("█")
@@ -155,7 +81,6 @@ unsigned int defaultrcs = 257;
  * 7: Snowman ("☃")
  */
 static unsigned int cursorshape = 2;
-
 /*
  * Default columns and rows numbers
  */
@@ -169,13 +94,7 @@ static unsigned int rows = 24;
 static unsigned int mouseshape = XC_xterm;
 static unsigned int mousefg = 7;
 static unsigned int mousebg = 0;
-
-/*
- * Color used to display font attributes when fontconfig selected a font which
- * doesn't match the ones requested.
- */
 static unsigned int defaultattr = 11;
-
 /*
  * Xresources preferences to load at startup
  */
@@ -311,20 +230,17 @@ static Shortcut shortcuts[] = {
  * to be mapped below, add them to this array.
  */
 static KeySym mappedkeys[] = { -1 };
-
 /*
  * State bits to ignore when matching key or button events.  By default,
  * numlock (Mod2Mask) and keyboard layout (XK_SWITCH_MOD) are ignored.
  */
 static uint ignoremod = Mod2Mask|XK_SWITCH_MOD;
-
 /*
  * Override mouse-select while mask is active (when MODE_MOUSE is set).
  * Note that if you want to use ShiftMask with selmasks, set this to an other
  * modifier, set to 0 to not use it.
  */
 static uint forceselmod = ShiftMask;
-
 /*
  * This is the huge key array which defines all compatibility to the Linux
  * world. Please decide about changes wisely.
@@ -541,22 +457,9 @@ static Key key[] = {
 	{ XK_F34,           XK_NO_MOD,      "\033[21;5~",    0,    0},
 	{ XK_F35,           XK_NO_MOD,      "\033[23;5~",    0,    0},
 };
-
-/*
- * Selection types' masks.
- * Use the same masks as usual.
- * Button1Mask is always unset, to make masks match between ButtonPress.
- * ButtonRelease and MotionNotify.
- * If no match is found, regular selection is used.
- */
 static uint selmasks[] = {
 	[SEL_RECTANGULAR] = Mod1Mask,
 };
-
-/*
- * Printable characters in ASCII, used to estimate the advance width
- * of single wide characters.
- */
 static char ascii_printable[] =
 	" !\"#$%&'()*+,-./0123456789:;<=>?"
 	"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"

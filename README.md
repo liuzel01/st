@@ -7,6 +7,7 @@
 + **follow urls** by pressing `alt-l`
 + **copy urls** in the same way with `alt-y`
 + **copy the output of commands** with `alt-o`
+  - 注意：<u>需要结合dmenu</u>
 
 ## Bindings for
 
@@ -25,9 +26,10 @@
 ## Other st patches
 
 + ~~Vertcenter, Scrollback, font2~~
-+ ~~updated to latest version 0.8.2~~
++ ~~updated to latest version 0.8.2~~i
+- download from [here](https://st.suckless.org/patches/alpha/) 
 
-## Installation for newbs
+## Installation
 
 ```
 git clone https://github.com/liuzel01/st
@@ -55,3 +57,6 @@ If st crashes when viewing emojis, install [libxft-bgra](https://aur.archlinux.o
 Note that some special characters may appear truncated if too wide. You might want to manually set your prefered emoji/special character font to a lower size in the `config.h` file to avoid this. By default, JoyPixels is used at a smaller size than the usual text.
 
 ## Contact
+
+- [st官网](http://st.suckless.org/)
+- 

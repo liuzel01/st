@@ -25,8 +25,9 @@ static double maxlatency = 33;
  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
  * attribute.
  */
-static unsigned int blinktimeout = 800;
-int ximspot_update_interval = 1000;
+// static unsigned int blinktimeout = 800;
+static unsigned int blinktimeout = 0;
+int ximspot_update_interval = 50;
 /*
  * thickness of underline and bar cursors
  */

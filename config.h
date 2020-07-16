@@ -1,5 +1,5 @@
 /* See LICENSE file for copyright and license details. */
-static char *font = "Source Code Pro:pixelsize=16:antialias=true:autohint=true";
+static char *font = "Source Code Pro:pixelsize=12:antialias=true:autohint=true";
 static char *font2[] = { "JoyPixels:pixelsize=10:antialias=true:autohint=true" };
 static int borderpx = 2;
 static char *shell = "/bin/sh";

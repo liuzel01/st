@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 static char *font = "Source Code Pro:pixelsize=12:antialias=true:autohint=true";
 static char *font2[] = { "JoyPixels:pixelsize=10:antialias=true:autohint=true" };
-static int borderpx = 2;
+static int borderpx = 1;
 static char *shell = "/bin/sh";
 char *utmp = NULL;
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";

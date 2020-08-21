@@ -1,8 +1,8 @@
 /* See LICENSE file for copyright and license details. */
-static char *font = "Source Code Pro:pixelsize=12:antialias=true:autohint=true";
-static char *font2[] = { "JoyPixels:pixelsize=10:antialias=true:autohint=true" };
+static char *font = "Source Code Pro:pixelsize=14:antialias=true:autohint=true";
+static char *font2[] = { "JoyPixels:pixelsize=14:antialias=true:autohint=true" };
 static int borderpx = 1;
-static char *shell = "/bin/sh";
+static char *shell = "/bin/zsh";
 char *utmp = NULL;
 char *stty_args = "stty raw pass8 nl -echo -iexten -cstopb 38400";
 /* identification sequence returned in DA and DECID */

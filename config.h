@@ -19,14 +19,15 @@ static unsigned int doubleclicktimeout = 300;
 static unsigned int tripleclicktimeout = 600;
 /* alt screens */
 int allowaltscreen = 1;
+int allowwindowops = 0;
 static double minlatency = 8;
 static double maxlatency = 33;
 /*
  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
  * attribute.
  */
-// static unsigned int blinktimeout = 800;
-static unsigned int blinktimeout = 0;
+static unsigned int blinktimeout = 800;
+// static unsigned int blinktimeout = 0;
 int ximspot_update_interval = 50;
 /*
  * thickness of underline and bar cursors
@@ -68,7 +69,9 @@ static const char *colorname[] = {
 	"#add8e6", /* 256 -> cursor */
 	"#555555", /* 257 -> rev cursor*/
 	"#282828", /* 258 -> bg */
-	"#ebdbb2", /* 259 -> fg */
+//	"#ebdbb2", /* 259 -> fg */    //听说可以改terminal显示颜色
+//	"#282a36", /* 258 -> bg */
+	"#f8f8f2", /* 259 -> fg */
 };
 unsigned int defaultfg = 259;
 unsigned int defaultbg = 258;
@@ -96,7 +99,7 @@ static unsigned int mousefg = 7;
 static unsigned int mousebg = 0;
 static unsigned int defaultattr = 11;
 /*
- * Xresources preferences to load at startup
+  Xresources preferences to load at startup
  */
 ResourcePref resources[] = {
 		{ "font",         STRING,  &font },
